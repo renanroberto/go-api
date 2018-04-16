@@ -1,3 +1,7 @@
+/*
+	Package controller is responsable for process information,
+	save and get from DB and authentication control.
+*/
 package controller
 
 import (
@@ -11,6 +15,7 @@ import (
 
 var currId int = len(model.Users)
 
+// GetUsers get all users from DB
 func GetUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
@@ -23,6 +28,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// GetUserById get a unique user by id from DB
 func GetUserById(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -52,13 +58,7 @@ func GetUserById(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// type Response struct {
-// 	Firstname string `json:"firstname"`
-// 	Lastname  string `json:"lastname"`
-// 	Email     string `json:"email"`
-// 	Password  string `json:"password"`
-// }
-
+// CreateUser save a new user on DB
 func CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(201)
@@ -82,6 +82,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(user)
 }
 
+// UpdateUser update a unique user from DB
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
@@ -116,6 +117,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// DeleteUser delete a unique user from DB
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
