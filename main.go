@@ -1,14 +1,14 @@
 package main
 
 import (
+	"api/router"
 	"fmt"
 	"log"
 	"net/http"
 	"runtime"
 
-	"api/router"
-
 	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type Doc struct {
@@ -42,6 +42,13 @@ func main() {
 	}
 
 	collection := session.DB("db-test").C("users")
+
+	info, err := collection.RemoveAll(bson.M{})
+	if err != nil {
+		panic(err)
+	}
+
+	log.Println(info)
 
 	doc := Doc{"Renan", "renanroberto1@gmail.com"}
 	err = collection.Insert(doc)
